@@ -39,7 +39,7 @@ app.add_middleware(
 #  ADMIN AUTH — Token-based password protection
 # ═══════════════════════════════════════════
 
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "salon2026")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "changeme")
 _admin_tokens: dict[str, float] = {}  # token → expiry timestamp
 TOKEN_TTL = 3600 * 8  # 8 hours
 
