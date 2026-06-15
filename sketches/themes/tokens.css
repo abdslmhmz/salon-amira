@@ -1,0 +1,24 @@
+/* Shared tokens for Salon Amira sketches */
+:root {
+  --color-bg: #f8fafd;
+  --color-surface: #ffffff;
+  --color-text: #0a1628;
+  --color-text-secondary: #64748d;
+  --color-text-muted: #94a3b8;
+  --color-accent: #533afd;
+  --color-accent-hover: #4434d4;
+  --color-rose: #c44569;
+  --color-rose-light: #fdf2f5;
+  --color-green: #15be53;
+  --color-green-light: #ecfdf5;
+  --color-border: #e5edf5;
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+  --shadow-card: rgba(23,23,23,0.08) 0px 15px 35px 0px;
+  --shadow-deep: rgba(50,50,93,0.25) 0px 30px 45px -30px, rgba(0,0,0,0.1) 0px 18px 36px -18px;
+  --font-display: 'Source Sans 3', 'Inter', sans-serif;
+  --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

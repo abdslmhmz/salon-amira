@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon Amira — Ambient Background</title>
+<script>p5.disableFriendlyErrors = true;</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; overflow: hidden; background: #f8fafd; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<script>
+// Salon Amira ambient background — floating silk ribbons
+// Purple + Rose palette, slow gentle motion, beauty-salon feel
+
+const PALETTE = [
+  [83, 58, 253, 18],    // purple
+  [124, 92, 252, 14],   // light purple
+  [196, 69, 105, 16],   // rose
+  [224, 106, 138, 10],  // light rose
+  [212, 168, 67, 8],    // gold accent
+];
+
+let ribbons = [];
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  pixelDensity(1);
+  colorMode(RGB, 255, 255, 255, 100);
+  noStroke();
+
+  // Create floating ribbons
+  for (let i = 0; i < 18; i++) {
+    ribbons.push({
+      x: random(width),
+      y: random(height),
+      w: random(60, 200),
+      h: random(20, 50),
+      speed: random(0.3, 0.8),
+      amp: random(20, 60),
+      phase: random(TWO_PI),
+      color: random(PALETTE),
+      rotation: random(TWO_PI),
+      rotSpeed: random(-0.002, 0.002),
+    });
+  }
+}
+
+function draw() {
+  background(248, 250, 253, 15); // warm white fade
+
+  let t = millis() * 0.001;
+
+  for (let r of ribbons) {
+    push();
+    translate(r.x, r.y);
+    rotate(r.rotation);
+    r.rotation += r.rotSpeed;
+
+    // Gentle sine wave drift
+    let driftX = sin(t * r.speed + r.phase) * r.amp;
+    let driftY = cos(t * r.speed * 0.7 + r.phase) * r.amp * 0.5;
+    translate(driftX, driftY);
+
+    // Draw soft ribbon
+    let c = r.color;
+    fill(c[0], c[1], c[2], c[3]);
+
+    // Elongated pill shape
+    beginShape();
+    let steps = 20;
+    for (let i = 0; i <= steps; i++) {
+      let a = map(i, 0, steps, -HALF_PI, HALF_PI);
+      let px = cos(a) * r.w * 0.5;
+      let py = sin(a) * r.h * 0.5;
+      // Wave the edges
+      py += sin(a * 3 + t * 0.5 + r.phase) * 8;
+      vertex(px, py);
+    }
+    endShape(CLOSE);
+
+    pop();
+  }
+
+  // Reset ribbons that drift off screen
+  for (let r of ribbons) {
+    let driftX = sin(t * r.speed + r.phase) * r.amp;
+    let driftY = cos(t * r.speed * 0.7 + r.phase) * r.amp * 0.5;
+    if (r.x + driftX < -200) r.x = width + 200;
+    if (r.x + driftX > width + 200) r.x = -200;
+    if (r.y + driftY < -200) r.y = height + 200;
+    if (r.y + driftY > height + 200) r.y = -200;
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+</script>
+</body>
+</html>

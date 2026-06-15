@@ -1,0 +1,278 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "hermes-agent",
+  "elements": [
+    {
+      "type": "rectangle",
+      "id": "bg-landing",
+      "x": 60, "y": 100,
+      "width": 200, "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-landing", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-landing",
+      "x": 65, "y": 110,
+      "width": 190, "height": 40,
+      "text": "🏠 Page d'accueil\nLanding Page",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "bg-landing", "originalText": "🏠 Page d'accueil\nLanding Page",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "a-landing-book",
+      "x": 260, "y": 150, "width": 80, "height": 0,
+      "points": [[0,0],[80,0]],
+      "endArrowhead": "arrow",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-a1", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-a1",
+      "x": 275, "y": 132,
+      "width": 50, "height": 16,
+      "text": "Click CTA",
+      "fontSize": 14, "fontFamily": 1, "strokeColor": "#757575",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "a-landing-book", "originalText": "Click CTA",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "bg-service",
+      "x": 340, "y": 100,
+      "width": 200, "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#b2f2bb", "fillStyle": "solid",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-service", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-service",
+      "x": 345, "y": 110,
+      "width": 190, "height": 40,
+      "text": "Étape 1: Choisir\nune prestation",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "bg-service", "originalText": "Étape 1: Choisir\nune prestation",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "a-service-date",
+      "x": 540, "y": 150, "width": 80, "height": 0,
+      "points": [[0,0],[80,0]],
+      "endArrowhead": "arrow",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-a2", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-a2",
+      "x": 555, "y": 132,
+      "width": 50, "height": 16,
+      "text": "Valider",
+      "fontSize": 14, "fontFamily": 1, "strokeColor": "#757575",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "a-service-date", "originalText": "Valider",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "bg-date",
+      "x": 620, "y": 100,
+      "width": 200, "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-date", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-date",
+      "x": 625, "y": 110,
+      "width": 190, "height": 40,
+      "text": "Étape 2: Choisir\nun créneau",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "bg-date", "originalText": "Étape 2: Choisir\nun créneau",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "a-date-form",
+      "x": 820, "y": 150, "width": 80, "height": 0,
+      "points": [[0,0],[80,0]],
+      "endArrowhead": "arrow",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-a3", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-a3",
+      "x": 835, "y": 132,
+      "width": 50, "height": 16,
+      "text": "Sélection",
+      "fontSize": 14, "fontFamily": 1, "strokeColor": "#757575",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "a-date-form", "originalText": "Sélection",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "bg-form",
+      "x": 900, "y": 100,
+      "width": 200, "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#d0bfff", "fillStyle": "solid",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-form", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-form",
+      "x": 905, "y": 110,
+      "width": 190, "height": 40,
+      "text": "Étape 3: Coordonnées\nNom + Téléphone",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "bg-form", "originalText": "Étape 3: Coordonnées\nNom + Téléphone",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "a-form-confirm",
+      "x": 1000, "y": 200, "width": 0, "height": 80,
+      "points": [[0,0],[0,80]],
+      "endArrowhead": "arrow",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-a4", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-a4",
+      "x": 970, "y": 225,
+      "width": 60, "height": 16,
+      "text": "Confirmer",
+      "fontSize": 14, "fontFamily": 1, "strokeColor": "#757575",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "a-form-confirm", "originalText": "Confirmer",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "bg-confirm",
+      "x": 900, "y": 280,
+      "width": 200, "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#c3fae8", "fillStyle": "solid",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-confirm", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-confirm",
+      "x": 905, "y": 290,
+      "width": 190, "height": 40,
+      "text": "Étape 4: Confirmation\n+ Télécharger PDF",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "bg-confirm", "originalText": "Étape 4: Confirmation\n+ Télécharger PDF",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "bg-dashboard",
+      "x": 60, "y": 280,
+      "width": 200, "height": 120,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#fff3bf", "fillStyle": "solid",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-dashboard", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-dashboard",
+      "x": 65, "y": 290,
+      "width": 190, "height": 60,
+      "text": "📋 Dashboard\nPrestataire\n6 onglets",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "bg-dashboard", "originalText": "📋 Dashboard\nPrestataire\n6 onglets",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "bg-lookup",
+      "x": 340, "y": 280,
+      "width": 200, "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "boundElements": [{ "id": "txt-lookup", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-lookup",
+      "x": 345, "y": 290,
+      "width": 190, "height": 40,
+      "text": "🔍 Retrouver RDV\nPar téléphone",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "bg-lookup", "originalText": "🔍 Retrouver RDV\nPar téléphone",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "a-landing-lookup",
+      "x": 160, "y": 200, "width": 0, "height": 78,
+      "points": [[0,0],[0,78]],
+      "endArrowhead": "arrow",
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "boundElements": [{ "id": "txt-a5", "type": "text" }]
+    },
+    {
+      "type": "text",
+      "id": "txt-a5",
+      "x": 130, "y": 224,
+      "width": 60, "height": 16,
+      "text": "alt: lookup",
+      "fontSize": 14, "fontFamily": 1, "strokeColor": "#757575",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "a-landing-lookup", "originalText": "alt: lookup",
+      "autoResize": true
+    },
+    {
+      "type": "text",
+      "id": "title-main",
+      "x": 400, "y": 30,
+      "width": 400, "height": 40,
+      "text": "Salon Amira — Flux de réservation",
+      "fontSize": 24, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "originalText": "Salon Amira — Flux de réservation",
+      "autoResize": true
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "x": 430, "y": 65,
+      "width": 340, "height": 20,
+      "text": "Parcours client (haut) + autres écrans (bas)",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#757575",
+      "originalText": "Parcours client (haut) + autres écrans (bas)",
+      "autoResize": true
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  }
+}

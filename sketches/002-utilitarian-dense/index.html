@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon Amira — Utilitarian Dense</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', -apple-system, sans-serif;
+  background: #fff; color: #1a1a2e; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+:root {
+  --accent: #533afd; --accent-hover: #4434d4;
+  --rose: #c44569; --green: #15be53;
+  --text: #1a1a2e; --muted: #64748b;
+  --border: #e2e8f0; --bg-warm: #f8fafc;
+}
+
+/* ── Compact Nav ── */
+nav {
+  background: #fff; border-bottom: 2px solid var(--accent);
+  padding: 8px 20px; display: flex; align-items: center; gap: 20px;
+}
+.nav-logo {
+  font-weight: 700; font-size: 18px; color: var(--accent);
+  letter-spacing: -0.5px;
+}
+.nav-links { display: flex; gap: 4px; margin-left: auto; }
+.nav-link {
+  padding: 6px 14px; border-radius: 6px; border: none; background: transparent;
+  font-family: inherit; font-size: 13px; font-weight: 500; color: var(--muted);
+  cursor: pointer; transition: all 0.15s;
+}
+.nav-link.active { background: var(--accent); color: #fff; }
+.nav-link:hover:not(.active) { background: #f1f5f9; }
+
+/* ── Two-Column Hero ── */
+.hero {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  max-width: 1100px; margin: 0 auto; padding: 48px 24px; align-items: center;
+}
+.hero-left h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; }
+.hero-left p { color: var(--muted); font-size: 0.95rem; margin: 12px 0 20px; }
+.hero-actions { display: flex; gap: 8px; }
+.btn {
+  padding: 10px 20px; border-radius: 6px; font-family: inherit;
+  font-size: 14px; font-weight: 600; cursor: pointer; border: none;
+}
+.btn-accent { background: var(--accent); color: #fff; }
+.btn-accent:hover { background: var(--accent-hover); }
+.btn-outline { background: #fff; color: var(--accent); border: 2px solid var(--accent); }
+.hero-right {
+  background: var(--bg-warm); border-radius: 12px; padding: 24px;
+  border: 1px solid var(--border);
+}
+.hero-right h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px; }
+.quick-slot { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.quick-slot .time { font-weight: 600; }
+.quick-slot .avail { color: var(--green); font-size: 0.8rem; font-weight: 500; }
+
+/* ── Compact Service Grid ── */
+.section { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+.section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+.section-header h2 { font-size: 1.25rem; font-weight: 700; }
+.section-header a { color: var(--accent); font-size: 0.85rem; font-weight: 500; text-decoration: none; }
+.grid-dense { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.card-sm {
+  padding: 16px; border-radius: 8px; border: 1px solid var(--border);
+  transition: border-color 0.15s; cursor: pointer;
+}
+.card-sm:hover { border-color: var(--accent); }
+.card-sm .name { font-weight: 600; font-size: 0.9rem; }
+.card-sm .desc { font-size: 0.8rem; color: var(--muted); margin: 2px 0 8px; }
+.card-sm .meta { display: flex; justify-content: space-between; }
+.card-sm .price { font-weight: 700; color: var(--accent); font-size: 0.9rem; }
+.card-sm .dur { font-size: 0.75rem; color: var(--muted); }
+
+/* ── Status Bar ── */
+.status-bar {
+  background: var(--accent); color: #fff; padding: 8px 24px;
+  font-size: 0.8rem; font-weight: 500; display: flex; gap: 24px;
+  justify-content: center;
+}
+.status-bar span { opacity: 0.85; }
+
+footer { text-align: center; padding: 16px; color: var(--muted); font-size: 0.75rem; border-top: 1px solid var(--border); }
+
+.tweaks {
+  position: fixed; bottom: 12px; right: 12px;
+  background: #fff; border-radius: 8px; padding: 8px 12px; font-size: 11px;
+  border: 1px solid var(--border); opacity: 0.6;
+}
+.tweaks:hover { opacity: 1; }
+.tweaks button { font-family: inherit; font-size: 11px; padding: 2px 6px; margin-left: 4px; border-radius: 4px; border: 1px solid var(--border); cursor: pointer; background: #fff; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SALON AMIRA</div>
+  <div class="nav-links">
+    <button class="nav-link active">Accueil</button>
+    <button class="nav-link">Réserver</button>
+    <button class="nav-link">Suivi</button>
+  </div>
+</nav>
+
+<div class="status-bar">
+  <span>🟢 Ouvert aujourd'hui</span>
+  <span>⏰ 9h00 – 18h00</span>
+  <span>📍 12 Rue Didouche, Alger Centre</span>
+</div>
+
+<div class="hero">
+  <div class="hero-left">
+    <h1>Réservez en 30 secondes.<br>Sans compte. Sans appel.</h1>
+    <p>7 prestations beauté disponibles aujourd'hui. Choisissez, cliquez, c'est fait.</p>
+    <div class="hero-actions">
+      <button class="btn btn-accent" onclick="alert('→ Flux de réservation')">Je réserve →</button>
+      <button class="btn btn-outline">Voir les prix</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <h3>Créneaux disponibles aujourd'hui</h3>
+    <div class="quick-slot"><span>Coiffure Femme</span><span class="time">10:00</span><span class="avail">dispo</span></div>
+    <div class="quick-slot"><span>Brushing</span><span class="time">11:30</span><span class="avail">dispo</span></div>
+    <div class="quick-slot"><span>Manucure</span><span class="time">14:00</span><span class="avail">dispo</span></div>
+    <div class="quick-slot"><span>Maquillage</span><span class="time">15:30</span><span class="avail">dispo</span></div>
+    <div class="quick-slot"><span>Soin Visage</span><span class="time">16:00</span><span class="avail">dispo</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2>Prestations</h2>
+    <a href="#">Tout voir →</a>
+  </div>
+  <div class="grid-dense" id="serviceGrid">
+    <div class="card-sm"><div class="name">💇‍♀️ Coiffure Femme</div><div class="desc">Coupe, brushing et coiffage</div><div class="meta"><span class="price">2 500 DA</span><span class="dur">45 min</span></div></div>
+    <div class="card-sm"><div class="name">✨ Brushing</div><div class="desc">Lissant ou bouclé pro</div><div class="meta"><span class="price">1 800 DA</span><span class="dur">30 min</span></div></div>
+    <div class="card-sm"><div class="name">🎨 Coloration</div><div class="desc">Complète, mèches, balayage</div><div class="meta"><span class="price">5 000 DA</span><span class="dur">90 min</span></div></div>
+    <div class="card-sm"><div class="name">💅 Manucure</div><div class="desc">Vernis classique ou semi-permanent</div><div class="meta"><span class="price">1 500 DA</span><span class="dur">30 min</span></div></div>
+    <div class="card-sm"><div class="name">💆‍♀️ Soin Visage</div><div class="desc">Nettoyage, hydratation, masque</div><div class="meta"><span class="price">3 500 DA</span><span class="dur">60 min</span></div></div>
+    <div class="card-sm"><div class="name">💄 Maquillage</div><div class="desc">Jour, soirée ou mariage</div><div class="meta"><span class="price">3 000 DA</span><span class="dur">45 min</span></div></div>
+    <div class="card-sm"><div class="name">🌿 Épilation</div><div class="desc">Visage ou corps à la cire</div><div class="meta"><span class="price">2 000 DA</span><span class="dur">30 min</span></div></div>
+  </div>
+</div>
+
+<footer>© 2026 Salon Amira · 12 Rue Didouche, Alger Centre · Lun–Sam 9h00–18h00</footer>
+
+<div class="tweaks">
+  Tweaks <button onclick="document.body.style.background='#fff'">Light</button>
+  <button onclick="document.body.style.background='#f8fafc'">Warm</button>
+</div>
+</body>
+</html>

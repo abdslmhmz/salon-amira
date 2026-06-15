@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+backend/venv/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Docker
+.env
+deploy/.env
+
+# Media / screenshots
+shots/
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dev / one-off scripts
+capture_*.py
+test_suite.py
+
+# DB — keep only init.sql
+db/*.sql
+!db/init.sql
+
+# Python cache
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Misc
+*.log

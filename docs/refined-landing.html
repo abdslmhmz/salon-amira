@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon Amira — Beauté & Bien-être, Alger Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple: #533afd; --purple-hover: #4434d4;
+  --rose: #c44569; --rose-light: #fdf2f5;
+  --navy: #0a1628; --slate: #64748d; --muted: #94a3b8;
+  --white: #fff; --border: #e5edf5; --warm: #f8fafd;
+  --shadow: rgba(23,23,23,0.08) 0px 15px 35px 0px;
+  --shadow-deep: rgba(50,50,93,0.25) 0px 30px 45px -30px, rgba(0,0,0,0.1) 0px 18px 36px -18px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--white); color: var(--navy); line-height: 1.5; font-weight: 300;
+}
+
+/* ─── Nav ─── */
+.nav {
+  background: rgba(255,255,255,0.88); backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; }
+.nav-logo {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--purple), #7c5cfc);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 14px; box-shadow: 0 2px 8px rgba(83,58,253,0.25);
+}
+.nav-title { font-weight: 600; font-size: 15px; color: var(--navy); letter-spacing: -0.2px; }
+.nav-sub { font-size: 11px; color: var(--muted); font-weight: 400; }
+.nav-cta {
+  background: var(--purple); color: #fff; border: none;
+  padding: 8px 20px; border-radius: 8px; font-family: inherit;
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  transition: background 0.2s var(--ease);
+}
+.nav-cta:hover { background: var(--purple-hover); }
+
+/* ─── Hero ─── */
+.hero {
+  text-align: center; padding: 80px 24px 60px; max-width: 700px; margin: 0 auto;
+}
+.hero-badge {
+  display: inline-block; background: #f4f3ff; color: var(--purple);
+  font-size: 13px; font-weight: 500; padding: 4px 14px; border-radius: 9999px; margin-bottom: 24px;
+}
+.hero h1 { font-size: 3rem; font-weight: 300; letter-spacing: -0.04em; line-height: 1.15; }
+.hero p { font-size: 1.125rem; color: var(--slate); margin: 16px 0 28px; line-height: 1.65; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; }
+.btn-primary {
+  background: var(--purple); color: #fff; border: none;
+  padding: 12px 28px; border-radius: 8px; font-family: inherit;
+  font-size: 16px; font-weight: 500; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(83,58,253,0.2);
+  transition: all 0.2s var(--ease);
+}
+.btn-primary:hover { background: var(--purple-hover); box-shadow: var(--shadow-deep); }
+.btn-ghost {
+  background: transparent; color: var(--slate); border: 1px solid var(--border);
+  padding: 12px 28px; border-radius: 8px; font-family: inherit;
+  font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--slate); }
+.hero-stats { display: flex; gap: 32px; justify-content: center; margin-top: 44px; }
+.hero-stats div { text-align: center; }
+.hero-stats strong { display: block; font-size: 1.5rem; font-weight: 600; color: var(--navy); }
+.hero-stats span { font-size: 13px; color: var(--muted); font-weight: 400; }
+
+/* ─── Section ─── */
+.section { max-width: 1000px; margin: 0 auto; padding: 56px 24px; }
+.section-label {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--purple); font-weight: 600; text-align: center; margin-bottom: 8px;
+}
+.section-title { font-size: 1.75rem; font-weight: 300; text-align: center; margin-bottom: 8px; letter-spacing: -0.02em; }
+.section-desc { color: var(--slate); text-align: center; font-weight: 300; margin-bottom: 36px; }
+
+/* ─── Services Grid ─── */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card {
+  background: #fff; border-radius: 12px; padding: 24px;
+  box-shadow: var(--shadow); transition: box-shadow 0.3s var(--ease); cursor: pointer;
+}
+.card:hover { box-shadow: var(--shadow-deep); }
+.card-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), #7c5cfc);
+  display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px;
+}
+.card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.card-desc { font-size: 0.875rem; color: var(--slate); font-weight: 300; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
+.card-price { font-weight: 600; color: var(--purple); font-size: 0.95rem; }
+.card-duration { font-size: 0.8rem; color: var(--muted); }
+
+/* ─── Why Us ─── */
+.why-section { background: var(--warm); padding: 56px 0; }
+.why-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; padding: 0 24px; }
+.why-card { text-align: center; padding: 16px; }
+.why-icon { font-size: 32px; margin-bottom: 10px; }
+.why-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.why-card p { font-size: 0.875rem; color: var(--slate); font-weight: 300; line-height: 1.5; }
+
+/* ─── CTA ─── */
+.cta { text-align: center; padding: 72px 24px; }
+.cta h2 { font-size: 2rem; font-weight: 300; margin-bottom: 8px; letter-spacing: -0.03em; }
+.cta p { color: var(--slate); font-weight: 300; margin-bottom: 24px; }
+
+/* ─── Footer ─── */
+.footer {
+  border-top: 1px solid var(--border); padding: 20px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem; color: var(--muted); max-width: 1000px; margin: 0 auto;
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .hero-stats { flex-direction: column; gap: 12px; margin-top: 28px; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .grid { grid-template-columns: 1fr; }
+  .section { padding: 40px 16px; }
+  .cta { padding: 48px 16px; }
+  .cta h2 { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">SA</div>
+    <div>
+      <div class="nav-title">Salon Amira</div>
+      <div class="nav-sub">Beauté & Bien-être — Alger Centre</div>
+    </div>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Prendre rendez-vous →</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">✨ Alger Centre</div>
+  <h1>Votre beauté,<br>notre savoir-faire.</h1>
+  <p>Coiffure, soins visage, manucure, maquillage, épilation. Un salon où on prend le temps, au centre d'Alger.</p>
+  <div class="hero-actions">
+    <button class="btn-primary">Je réserve →</button>
+    <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Nos prestations</button>
+  </div>
+  <div class="hero-stats">
+    <div><strong>7</strong><span>prestations</span></div>
+    <div><strong>Lun–Sam</strong><span>9h–18h</span></div>
+    <div><strong>Alger</strong><span>Centre</span></div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="section-label">Prestations</div>
+  <h2 class="section-title">Ce qu'on fait</h2>
+  <p class="section-desc">7 prestations, des pros qui savent ce qu'elles font.</p>
+  <div class="grid">
+    <div class="card"><div class="card-icon">💇‍♀️</div><h3>Coiffure Femme</h3><p class="card-desc">Coupe, brushing et coiffage sur mesure</p><div class="card-footer"><span class="card-duration">45 min</span><span class="card-price">2 500 DA</span></div></div>
+    <div class="card"><div class="card-icon">✨</div><h3>Brushing</h3><p class="card-desc">Brushing lissant ou bouclé professionnel</p><div class="card-footer"><span class="card-duration">30 min</span><span class="card-price">1 800 DA</span></div></div>
+    <div class="card"><div class="card-icon">🎨</div><h3>Coloration</h3><p class="card-desc">Coloration complète, mèches ou balayage</p><div class="card-footer"><span class="card-duration">90 min</span><span class="card-price">5 000 DA</span></div></div>
+    <div class="card"><div class="card-icon">💅</div><h3>Manucure</h3><p class="card-desc">Pose de vernis classique ou semi-permanent</p><div class="card-footer"><span class="card-duration">30 min</span><span class="card-price">1 500 DA</span></div></div>
+    <div class="card"><div class="card-icon">💆‍♀️</div><h3>Soin Visage</h3><p class="card-desc">Nettoyage, hydratation et masque adapté</p><div class="card-footer"><span class="card-duration">60 min</span><span class="card-price">3 500 DA</span></div></div>
+    <div class="card"><div class="card-icon">💄</div><h3>Maquillage</h3><p class="card-desc">Maquillage jour, soirée ou mariage</p><div class="card-footer"><span class="card-duration">45 min</span><span class="card-price">3 000 DA</span></div></div>
+    <div class="card"><div class="card-icon">🌿</div><h3>Épilation</h3><p class="card-desc">Épilation visage ou corps à la cire</p><div class="card-footer"><span class="card-duration">30 min</span><span class="card-price">2 000 DA</span></div></div>
+  </div>
+</section>
+
+<div class="why-section">
+  <div class="section-label">Pourquoi nous</div>
+  <h2 class="section-title" style="margin-bottom:36px">Pourquoi Salon Amira ?</h2>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">⭐</div><h3>Expertise</h3><p>Des coiffeuses et esthéticiennes qui se forment régulièrement.</p></div>
+    <div class="why-card"><div class="why-icon">🌿</div><h3>Produits doux</h3><p>On choisit des produits adaptés à chaque type de peau et de cheveu.</p></div>
+    <div class="why-card"><div class="why-icon">📱</div><h3>Réservation facile</h3><p>Vous réservez en ligne, quand vous voulez. Pas besoin d'appeler.</p></div>
+    <div class="why-card"><div class="why-icon">💝</div><h3>Ambiance cocooning</h3><p>Un endroit calme, pensé pour que vous déconnectiez vraiment.</p></div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>On s'occupe de vous ?</h2>
+  <p>La réservation prend une minute. Pas de compte à créer.</p>
+  <button class="btn-primary" style="padding:14px 36px; font-size:16px;">Je réserve →</button>
+</div>
+
+<footer class="footer">
+  <div><strong>Salon Amira</strong><br>12 Rue Didouche, Alger Centre<br>Lun–Sam · 9h00 – 18h00</div>
+  <div>© 2026 Salon Amira — Beauté & Bien-être</div>
+</footer>
+
+</body>
+</html>
