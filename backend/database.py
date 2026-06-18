@@ -16,6 +16,9 @@ if DATABASE_URL.startswith("sqlite"):
 
 engine = create_engine(DATABASE_URL, connect_args=connect_args, echo=False, pool_pre_ping=True)
 
+# WHY autoflush=False: All writes must be explicit via commit().
+# Prevents accidental partial writes and makes transaction
+# boundaries visible in the code. Safer for booking integrity.
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 class Base(DeclarativeBase):
@@ -25,9 +28,8 @@ def get_db():
     db = SessionLocal()
     try:
         yield db
+    except Exception:
+        db.rollback()
+        raise
     finally:
         db.close()
-
-def init_db():
-    """Create all tables."""
-    Base.metadata.create_all(bind=engine)

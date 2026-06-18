@@ -1,157 +1,181 @@
-import { useState, useEffect } from 'react'
-import LandingPage from './pages/LandingPage'
-import ClientBooking from './pages/ClientBooking'
-import ProviderDashboard from './pages/ProviderDashboard'
-import LookupAppointment from './pages/LookupAppointment'
-import AdminLogin from './pages/AdminLogin'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate, useLocation, Outlet } from 'react-router-dom'
 import { api } from './api'
+import { ToastProvider } from './components/Toast'
+import ErrorBoundary from './components/ErrorBoundary'
 
-const PUBLIC_TABS = [
-  { key: 'landing', label: 'Accueil', component: LandingPage },
-  { key: 'client', label: 'Réserver', component: ClientBooking },
-]
+const LandingPage = lazy(() => import('./pages/LandingPage'))
+const ClientBooking = lazy(() => import('./pages/ClientBooking'))
+const LookupAppointment = lazy(() => import('./pages/LookupAppointment'))
+const ProviderDashboard = lazy(() => import('./pages/ProviderDashboard'))
+const AdminLogin = lazy(() => import('./pages/AdminLogin'))
 
-const ADMIN_TABS = [
-  { key: 'presta', label: 'Dashboard', component: ProviderDashboard },
-  { key: 'lookup', label: 'Retrouver RDV', component: LookupAppointment },
-]
+// ═══════════════════════════════════════════
+//  CLIENT LAYOUT — clean topnav, zero admin references
+// ═══════════════════════════════════════════
 
-export default function App() {
-  const [tab, setTab] = useState('landing')
-  const [authenticated, setAuthenticated] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
+function ClientLayout() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [settings, setSettings] = useState({})
 
   useEffect(() => {
-    if (api.isAuthenticated()) {
-      api.checkAuth()
-        .then(() => setAuthenticated(true))
-        .catch(() => {})
-    }
+    api.getSettings().then(setSettings).catch(e => { if (import.meta.env.DEV) console.error(e) })
   }, [])
 
-  const handleLogin = () => {
-    setAuthenticated(true)
-    setShowLogin(false)
-    setTab('presta')
-  }
+  const salonName = settings.salon_name || 'Salon Amira'
+  const initials = salonName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase()
 
-  const handleLogout = async () => {
-    await api.logout()
-    setAuthenticated(false)
-    setTab('landing')
-  }
-
-  const goToBooking = () => setTab('client')
-
-  const selectTab = (key) => {
-    setTab(key)
-    setMobileMenuOpen(false)
-  }
-
-  const tabs = [
-    ...PUBLIC_TABS,
-    ...(authenticated ? ADMIN_TABS : []),
+  const links = [
+    { path: '/', label: 'Accueil' },
+    { path: '/reserver', label: 'Réserver' },
+    { path: '/rdv', label: 'Retrouver RDV' },
   ]
 
-  const Active = tabs.find(t => t.key === tab)?.component
+  const isActive = (path) => location.pathname === path
+  const closeMenu = () => setMobileMenuOpen(false)
+  const select = (path) => { navigate(path); closeMenu() }
 
   return (
     <div className="app">
-      {/* ── Navigation ── */}
       <nav className="topnav">
-        <div className="topnav-brand">
-          <div className="topnav-logo">SA</div>
+        <div className="topnav-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+          <div className="topnav-logo">{initials}</div>
           <div>
-            <div className="topnav-title">Salon Amira</div>
+            <div className="topnav-title">{salonName}</div>
             <div className="topnav-sub">Beauté & Bien-être — Alger Centre</div>
           </div>
         </div>
 
-        {/* Desktop tabs — hidden on mobile */}
         <div className="topnav-tabs topnav-desktop">
-          {tabs.map(t => (
-            <button
-              key={t.key}
-              className={`topnav-tab ${tab === t.key ? 'active' : ''}`}
-              onClick={() => selectTab(t.key)}
-            >
-              {t.label}
-            </button>
+          {links.map(l => (
+            <button key={l.path} className={`topnav-tab ${isActive(l.path) ? 'active' : ''}`}
+              onClick={() => select(l.path)}>{l.label}</button>
           ))}
-          {!authenticated ? (
-            <button className="topnav-tab" onClick={() => setShowLogin(true)}>
-              Admin
-            </button>
-          ) : (
-            <button className="topnav-tab" onClick={handleLogout} style={{color:'var(--red)'}}>
-              Déconnexion
-            </button>
-          )}
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="mobile-nav-toggle"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Menu"
-          aria-expanded={mobileMenuOpen}
-        >
+        <button className="mobile-nav-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Menu" aria-expanded={mobileMenuOpen}>
           <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`} />
           <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`} />
           <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`} />
         </button>
       </nav>
 
-      {/* Mobile slide-out drawer */}
       {mobileMenuOpen && (
         <>
-          <div className="mobile-drawer-overlay" onClick={() => setMobileMenuOpen(false)} />
+          <div className="mobile-drawer-overlay" onClick={closeMenu} />
           <div className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
             <div className="mobile-drawer-header">
               <div className="topnav-brand">
-                <div className="topnav-logo">SA</div>
-                <div>
-                  <div className="topnav-title">Salon Amira</div>
-                </div>
+                <div className="topnav-logo">{initials}</div>
+                <div><div className="topnav-title">{salonName}</div></div>
               </div>
-              <button className="mobile-drawer-close" onClick={() => setMobileMenuOpen(false)}>
+              <button className="mobile-drawer-close" onClick={closeMenu} aria-label="Fermer">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </button>
             </div>
             <nav className="mobile-drawer-nav">
-              {tabs.map(t => (
-                <button
-                  key={t.key}
-                  className={`mobile-drawer-link ${tab === t.key ? 'active' : ''}`}
-                  onClick={() => selectTab(t.key)}
-                >
-                  {t.label}
-                </button>
+              {links.map(l => (
+                <button key={l.path} className={`mobile-drawer-link ${isActive(l.path) ? 'active' : ''}`}
+                  onClick={() => select(l.path)}>{l.label}</button>
               ))}
-              <div className="mobile-drawer-divider" />
-              {!authenticated ? (
-                <button className="mobile-drawer-link" onClick={() => { setShowLogin(true); setMobileMenuOpen(false) }}>
-                  Administration
-                </button>
-              ) : (
-                <button className="mobile-drawer-link" onClick={() => { handleLogout(); setMobileMenuOpen(false) }} style={{color:'var(--red)'}}>
-                  Déconnexion
-                </button>
-              )}
             </nav>
           </div>
         </>
       )}
 
-      {/* ── Main content ── */}
-      <main style={{ flex: 1, padding: tab === 'landing' ? '0 24px' : '24px', maxWidth: 1100, margin: '0 auto', width: '100%' }}>
-        {Active && (tab === 'landing' ? <Active onBookNow={goToBooking} /> : <Active />)}
+      <main className={location.pathname === '/' ? 'main-landing' : 'main-default'}>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="text-center py-8">Chargement...</div>}>
+            <Outlet context={{ navigate }} />
+          </Suspense>
+        </ErrorBoundary>
       </main>
-
-      {showLogin && <AdminLogin onSuccess={handleLogin} />}
     </div>
+  )
+}
+
+// ═══════════════════════════════════════════
+//  PAGE WRAPPERS — pass callbacks to pages from router context
+// ═══════════════════════════════════════════
+
+function LandingPageWrapper() {
+  const navigate = useNavigate()
+  return <LandingPage onBookNow={() => navigate('/reserver')} />
+}
+
+// ═══════════════════════════════════════════
+//  ADMIN LAYOUT — /admin/* — auth gate + provider dashboard
+// ═══════════════════════════════════════════
+
+function AdminLayout() {
+  const [auth, setAuth] = useState(null) // null=checking
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (api.isAuthenticated()) {
+      api.checkAuth()
+        .then(() => setAuth(true))
+        .catch(e => { if (import.meta.env.DEV) console.error('auth check failed', e); api.logout().catch(err => { if (import.meta.env.DEV) console.error('logout failed', err) }); setAuth(false) })
+    } else {
+      setAuth(false)
+    }
+  }, [])
+
+  const handleLogin = () => {
+    setAuth(true)
+    navigate('/admin/agenda', { replace: true })
+  }
+
+  const handleLogout = async () => {
+    await api.logout()
+    setAuth(false)
+    navigate('/admin', { replace: true })
+  }
+
+  if (auth === null) return <div className="text-center py-8">Vérification...</div>
+
+  if (!auth) {
+    return (
+      <Suspense fallback={<div className="text-center py-8">Connexion...</div>}>
+        <AdminLogin onSuccess={handleLogin} standalone />
+      </Suspense>
+    )
+  }
+
+  return (
+    <Suspense fallback={<div className="text-center py-8">Chargement...</div>}>
+      <ToastProvider>
+        <ErrorBoundary>
+          <ProviderDashboard onLogout={handleLogout} />
+        </ErrorBoundary>
+      </ToastProvider>
+    </Suspense>
+  )
+}
+
+// ═══════════════════════════════════════════
+//  APP — Router root
+// ═══════════════════════════════════════════
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Client-facing routes */}
+        <Route element={<ClientLayout />}>
+          <Route index element={<LandingPageWrapper />} />
+          <Route path="reserver" element={<ClientBooking />} />
+          <Route path="rdv" element={<LookupAppointment />} />
+        </Route>
+
+        {/* Admin routes — separate layout */}
+        <Route path="admin/*" element={<AdminLayout />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
