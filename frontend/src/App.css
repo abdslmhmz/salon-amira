@@ -342,7 +342,7 @@ select.input {
 }
 
 .agenda-header {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; flex-direction: column; align-items: start;
 }
 
 /* ═══════════════════════════════════════════
@@ -453,7 +453,7 @@ select.input {
 /* ═══════════════════════════════════════════
    CALENDAR
    ═══════════════════════════════════════════ */
-.calendar-wrapper { position: relative; display: inline-block; }
+.calendar-wrapper { position: relative; display: inline-block; align-self: center; }
 .calendar-trigger {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 8px 14px; border: 1px solid var(--border);

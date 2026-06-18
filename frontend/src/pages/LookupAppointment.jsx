@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { api } from '../api'
 import { ServiceIcon } from '../components/Illustrations'
+import { formatPrice } from '../utils'
 
 const STATUS_LABELS = { confirmed: 'Confirmé', completed: 'Terminé', cancelled: 'Annulé', no_show: 'No-show' }
 const SERVICE_ICON_MAP = {
@@ -15,10 +16,14 @@ export default function LookupAppointment() {
   const [error, setError] = useState('')
 
   const search = async () => {
-    if (!phone.trim()) { setError('Entrez un numéro de téléphone'); return }
+    const phoneClean = phone.trim()
+    if (!phoneClean) { setError('Entrez un numéro de téléphone'); return }
+    if (!/^\+?[0-9\s\-]{8,15}$/.test(phoneClean)) {
+      setError('Format de téléphone invalide (ex: 0550 12 34 56)'); return
+    }
     setLoading(true); setError('')
     try {
-      const data = await api.getAppointments({ phone: phone.trim() })
+      const data = await api.getAppointments({ phone: phoneClean })
       setAppointments(data)
       if (data.length === 0) setError('Aucun rendez-vous trouvé pour ce numéro')
     } catch (e) {
@@ -28,7 +33,6 @@ export default function LookupAppointment() {
     }
   }
 
-  const formatPrice = (p) => `${(p/100).toFixed(0).replace('.', ',')} DA`
   const formatDate = (iso) => new Date(iso).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
   const formatTime = (iso) => iso?.split('T')[1]?.substring(0, 5)
 
@@ -66,7 +70,7 @@ export default function LookupAppointment() {
               return (
                 <div
                   key={a.id}
-                  className="p-4"
+                  className="p-4 lookup-appt-card"
                   style={{ borderRadius: 'var(--radius)', background: past ? 'var(--body-bg)' : 'var(--rose-light)', opacity: past ? 0.7 : 1 }}
                 >
                   <div className="flex items-start gap-3">

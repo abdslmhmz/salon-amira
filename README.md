@@ -40,7 +40,7 @@ L'application est accessible sur :
 | Service | Durée | Prix |
 |---------|-------|------|
 | Coiffure Femme | 45 min | 2 500 DA |
-| Coupe Homme | 30 min | 1 500 DA |
+| Épilation | 30 min | 2 000 DA |
 | Coloration | 60–90 min | 4 500 DA |
 | Brushing | 30–45 min | 1 800 DA |
 | Soin Visage | 60 min | 3 500 DA |
@@ -49,10 +49,35 @@ L'application est accessible sur :
 
 ## Architecture
 
+### Data Flow
+
 ```
-navigateur → :3000 (nginx) → React SPA
-                            → /api/* → :8000 (FastAPI) → :3307 (MySQL)
+Phone/Desktop → :3000 (nginx)
+                ├── /           → React SPA (Vite)
+                └── /api/*      → :8000 (FastAPI)
+                                  ├── /api/services        → CRUD services
+                                  ├── /api/appointments    → CRUD rendez-vous
+                                  ├── /api/slots           → Calcul créneaux
+                                  ├── /api/availabilities  → Horaires récurrents
+                                  ├── /api/blocked-slots   → Blocages ponctuels
+                                  ├── /api/overrides       → Exceptions dates
+                                  ├── /api/analytics       → Statistiques
+                                  └── /api/admin/*         → Auth + sessions
+                                  
+                                  Tous → SQLAlchemy → MySQL 8.4 (:3306)
 ```
+
+### Slot Calculation Pipeline
+
+```
+1. Schedule Overrides (vacances, jours fériés)
+2. Recurring Availabilities (horaires normaux)
+3. Subtract Blocked Slots (pauses, congés)
+4. Subtract Existing Appointments (déjà réservés)
+5. Slice into Service-Duration Slots
+```
+
+WHY this order: Overrides MUST trump recurring rules or holidays don't work.
 
 - **Frontend:** React 18 + Vite, nginx reverse proxy, CSS custom properties
 - **Backend:** FastAPI, SQLAlchemy, MySQL 8.4, génération PDF

@@ -10,14 +10,14 @@ import { DAYS } from '../utils'
 const AnalyticsDashboard = lazy(() => import('./AnalyticsDashboard'))
 
 const TABS = [
-  { key: 'dashboard', label: '📊 Tableau de bord' },
+  { key: 'dashboard', label: 'Tableau de bord' },
   { key: 'agenda', label: 'Agenda' },
   { key: 'services', label: 'Services' },
   { key: 'availabilities', label: 'Disponibilités' },
   { key: 'blocked', label: 'Créneaux bloqués' },
   { key: 'exceptions', label: 'Exceptions' },
   { key: 'analytics', label: 'Statistiques' },
-  { key: 'cms-settings', label: '⚙️ Paramètres' },
+  { key: 'cms-settings', label: 'Paramètres' },
 ]
 
 const STATUS_LABELS = { confirmed: 'Confirmé', completed: 'Terminé', cancelled: 'Annulé', no_show: 'No-show', pending: 'En attente' }
@@ -607,7 +607,7 @@ export default function ProviderDashboard({ onLogout }) {
             </div>
             <a role="button" className="sidebar-link" style={{ color: 'var(--accent)' }}
               onClick={() => { setShowTour(true); setSidebarOpen(false) }}>
-              🗺️ Visite guidée
+              Visite guidée
             </a>
             <a href="/" className="sidebar-link"
               onClick={e => { e.preventDefault(); window.location.href = '/' }}>
@@ -678,7 +678,7 @@ export default function ProviderDashboard({ onLogout }) {
                       <span className="agenda-client">{a.client_name}</span>
                     </div>
                     <div className="agenda-slot-actions">
-                      <label htmlFor={`status-${a.id}`} className="sr-only">Statut du RDV</label>
+                      <label htmlFor={`status-${a.id}`} className="sr-only">Statut </label>
                       <select id={`status-${a.id}`} className="badge-select" value={a.status} onChange={e => handleStatus(a.id, e.target.value, a.client_name)} title="Changer le statut de ce rendez-vous">
                         {Object.entries(STATUS_LABELS).map(([k, v]) => (<option key={k} value={k}>{v}</option>))}
                       </select>

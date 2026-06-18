@@ -1,12 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
+import { MONTHS } from '../utils'
 
-const MONTHS = [
-  'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-  'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-]
 const DAY_HEADERS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim']
 
-export default function Calendar({ selected, onSelect, minDate, maxDate }) {
+export default function Calendar({ selected, onSelect, minDate, maxDate, availabilityMap = {}, onMonthChange }) {
   const today = new Date()
   const todayStr = today.toISOString().split('T')[0]
 
@@ -34,6 +31,11 @@ export default function Calendar({ selected, onSelect, minDate, maxDate }) {
       setViewMonth(d.getMonth())
     }
   }, [selected])
+
+  // Notify parent when month changes
+  useEffect(() => {
+    if (onMonthChange) onMonthChange(viewYear, viewMonth)
+  }, [viewYear, viewMonth, onMonthChange])
 
   const prevMonth = () => {
     if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1) }
@@ -135,6 +137,9 @@ export default function Calendar({ selected, onSelect, minDate, maxDate }) {
               const isToday = dStr === todayStr
               const isSel = dStr === selectedStr
               const disabled = isPast(dayNum) || isFuture(dayNum)
+              const avail = availabilityMap[dStr]
+              const noSlots = avail && !avail.has_slots && !disabled
+              const hasSlots = avail && avail.has_slots && !disabled
 
               let cls = 'calendar-day'
               if (isToday) cls += ' today'
@@ -149,6 +154,8 @@ export default function Calendar({ selected, onSelect, minDate, maxDate }) {
                 >
                   <span className="calendar-day-num">{dayNum}</span>
                   {isToday && !isSel && <span className="calendar-day-dot" />}
+                  {noSlots && <span className="calendar-no-slot-dot" />}
+                  {hasSlots && <span className="calendar-has-slot-dot" />}
                 </div>
               )
             })}
